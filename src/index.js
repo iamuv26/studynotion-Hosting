@@ -10,17 +10,23 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducer";
 
 const store = configureStore({
-  reducer: rootReducer,
+    reducer: rootReducer,
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-        <Toaster />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+
+root.render( <
+    React.StrictMode >
+    <
+    Provider store = { store } >
+    <
+    BrowserRouter >
+    <
+    App / >
+    <
+    Toaster / >
+    <
+    /BrowserRouter> <
+    /Provider> <
+    /React.StrictMode>
 );
