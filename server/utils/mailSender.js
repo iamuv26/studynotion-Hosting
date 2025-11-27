@@ -18,10 +18,15 @@ const mailSender = async (email, title, body) => {
       subject: `${title}`, // Subject line
       html: `${body}`, // html body
     })
-    console.log(info.response)
+    console.log("Email sent successfully:", info.response)
     return info
   } catch (error) {
-    console.log(error.message)
+    console.error("Error sending email:", error)
+    console.error("Mail Config:", {
+      host: process.env.MAIL_HOST,
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS ? "****" : "MISSING",
+    })
     return error.message
   }
 }
