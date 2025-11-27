@@ -3,14 +3,18 @@ const nodemailer = require("nodemailer")
 const mailSender = async (email, title, body) => {
   try {
     let transporter = nodemailer.createTransport({
-      service: 'gmail',
       host: process.env.MAIL_HOST,
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
       },
       family: 4, // Force IPv4
+      connectionTimeout: 10000, // 10 seconds timeout
     })
+
+    console.log(`Attempting to send email to ${email} via Gmail...`)
 
     let info = await transporter.sendMail({
       from: `"Studynotion | CodeHelp" <${process.env.MAIL_USER}>`, // sender address
@@ -22,7 +26,7 @@ const mailSender = async (email, title, body) => {
     return info
   } catch (error) {
     console.log(error.message)
-    return error.message
+    throw error // Throw error so OTP creation fails
   }
 }
 
