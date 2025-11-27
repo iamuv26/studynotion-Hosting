@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
+import { AiOutlineMenu, AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai"
 import { BsChevronDown } from "react-icons/bs"
 import { useSelector } from "react-redux"
 import { Link, matchPath, useLocation } from "react-router-dom"
@@ -38,6 +38,10 @@ function Navbar() {
 
   const [subLinks, setSubLinks] = useState([])
   const [loading, setLoading] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
+  const closeMobileMenu = () => setIsMobileMenuOpen(false)
 
   useEffect(() => {
     ; (async () => {
@@ -77,8 +81,8 @@ function Navbar() {
                   <>
                     <div
                       className={`group relative flex cursor-pointer items-center gap-1 ${matchRoute("/catalog/:catalogName")
-                          ? "text-yellow-25"
-                          : "text-richblack-25"
+                        ? "text-yellow-25"
+                        : "text-richblack-25"
                         }`}
                     >
                       <p>{link.title}</p>
@@ -116,8 +120,8 @@ function Navbar() {
                   <Link to={link?.path}>
                     <p
                       className={`${matchRoute(link?.path)
-                          ? "text-yellow-25"
-                          : "text-richblack-25"
+                        ? "text-yellow-25"
+                        : "text-richblack-25"
                         }`}
                     >
                       {link.title}
@@ -156,10 +160,84 @@ function Navbar() {
           )}
           {token !== null && <ProfileDropdown />}
         </div>
-        <button className="mr-4 md:hidden">
-          <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
+        <button className="mr-4 md:hidden" onClick={toggleMobileMenu}>
+          {isMobileMenuOpen ? (
+            <AiOutlineClose fontSize={24} fill="#AFB2BF" />
+          ) : (
+            <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
+          )}
         </button>
       </div>
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-50 top-14 flex flex-col bg-richblack-900 p-4 md:hidden overflow-y-auto border-t border-richblack-700">
+          <nav className="flex flex-col gap-4 text-richblack-25">
+            {NavbarLinks.map((link, index) => (
+              <div key={index}>
+                {link.title === "Catalog" ? (
+                  <div className="flex flex-col gap-2">
+                    <p className="text-richblack-25 font-semibold">{link.title}</p>
+                    <div className="flex flex-col gap-2 pl-4 border-l border-richblack-700">
+                      {loading ? (
+                        <p className="text-richblack-400">Loading...</p>
+                      ) : subLinks.length ? (
+                        subLinks.map((subLink, i) => (
+                          <Link
+                            to={`/catalog/${subLink.name.split(" ").join("-").toLowerCase()}`}
+                            key={i}
+                            onClick={closeMobileMenu}
+                            className="text-richblack-100 hover:text-richblack-25"
+                          >
+                            {subLink.name}
+                          </Link>
+                        ))
+                      ) : (
+                        <p className="text-richblack-400">No Courses Found</p>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <Link to={link?.path} onClick={closeMobileMenu}>
+                    <p className={`${matchRoute(link?.path) ? "text-yellow-25" : "text-richblack-25"}`}>
+                      {link.title}
+                    </p>
+                  </Link>
+                )}
+              </div>
+            ))}
+          </nav>
+
+          <div className="h-[1px] w-full bg-richblack-700 my-4"></div>
+
+          <div className="flex flex-col gap-4">
+            {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+              <Link to="/dashboard/cart" onClick={closeMobileMenu} className="flex items-center gap-2 text-richblack-25">
+                <AiOutlineShoppingCart />
+                Cart ({totalItems})
+              </Link>
+            )}
+            {token === null && (
+              <div className="flex flex-col gap-4">
+                <Link to="/login" onClick={closeMobileMenu}>
+                  <button className="w-full rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                    Log in
+                  </button>
+                </Link>
+                <Link to="/signup" onClick={closeMobileMenu}>
+                  <button className="w-full rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                    Sign up
+                  </button>
+                </Link>
+              </div>
+            )}
+            {token !== null && (
+              <div onClick={closeMobileMenu}>
+                <ProfileDropdown />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
