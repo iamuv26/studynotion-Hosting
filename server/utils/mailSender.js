@@ -3,15 +3,13 @@ const nodemailer = require("nodemailer")
 const mailSender = async (email, title, body) => {
   try {
     let transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
-      port: 465,
-      secure: true,
+      service: 'gmail',
       auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
       },
       family: 4, // Force IPv4
-      connectionTimeout: 10000, // 10 seconds timeout
+      connectionTimeout: 20000, // 20 seconds timeout
     })
 
     console.log(`Attempting to send email to ${email} via Gmail...`)
