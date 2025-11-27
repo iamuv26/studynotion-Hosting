@@ -3,14 +3,16 @@ const fetch = require('node-fetch'); // Assuming node-fetch is available or usin
 // checking if global fetch exists
 const fetchAPI = global.fetch || require('node-fetch');
 
-const BASE_URL = 'http://localhost:4000/api/v1';
+require("dotenv").config();
+const BASE_URL = process.env.BASE_URL || 'http://localhost:4000/api/v1';
 
 async function verifyBackend() {
     console.log('Starting Backend Verification...');
 
     // 1. Test Health Check
     try {
-        const res = await fetchAPI('http://localhost:4000/');
+        const baseUrlRoot = process.env.BASE_URL?.replace('/api/v1', '') || 'http://localhost:4000';
+        const res = await fetchAPI(`${baseUrlRoot}/`);
         const data = await res.json();
         console.log('Health Check:', data.success ? 'PASS' : 'FAIL', data.message);
     } catch (e) {

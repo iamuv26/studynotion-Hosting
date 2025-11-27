@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 
-const BASE_URL = 'http://localhost:4000/api/v1';
+require("dotenv").config();
+const BASE_URL = process.env.BASE_URL || 'http://localhost:4000/api/v1';
 
 async function completeSignup() {
     try {
