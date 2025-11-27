@@ -6,47 +6,48 @@ const router = express.Router()
 
 // Course Controllers Import
 const {
-  createCourse,
-  getAllCourses,
-  getCourseDetails,
-  getFullCourseDetails,
-  editCourse,
-  getInstructorCourses,
-  deleteCourse,
+    createCourse,
+    getAllCourses,
+    getCourseDetails,
+    getFullCourseDetails,
+    editCourse,
+    getInstructorCourses,
+    deleteCourse,
+    searchCourses,
 } = require("../controllers/Course")
 
-// Tags Controllers Import
+const { generateCourse } = require("../controllers/AICourseGenerator")
 
 // Categories Controllers Import
 const {
-  showAllCategories,
-  createCategory,
-  categoryPageDetails,
+    showAllCategories,
+    createCategory,
+    categoryPageDetails,
 } = require("../controllers/Category")
 
 // Sections Controllers Import
 const {
-  createSection,
-  updateSection,
-  deleteSection,
+    createSection,
+    updateSection,
+    deleteSection,
 } = require("../controllers/Section")
 
 // Sub-Sections Controllers Import
 const {
-  createSubSection,
-  updateSubSection,
-  deleteSubSection,
+    createSubSection,
+    updateSubSection,
+    deleteSubSection,
 } = require("../controllers/Subsection")
 
 // Rating Controllers Import
 const {
-  createRating,
-  getAverageRating,
-  getAllRatingReview,
+    createRating,
+    getAverageRating,
+    getAllRatingReview,
 } = require("../controllers/RatingandReview")
 const {
-  updateCourseProgress,
-  getProgressPercentage,
+    updateCourseProgress,
+    getProgressPercentage,
 } = require("../controllers/courseProgress")
 // Importing Middlewares
 const { auth, isInstructor, isStudent, isAdmin } = require("../middleware/auth")
@@ -57,6 +58,8 @@ const { auth, isInstructor, isStudent, isAdmin } = require("../middleware/auth")
 
 // Courses can Only be Created by Instructors
 router.post("/createCourse", auth, isInstructor, createCourse)
+// Generate Course using AI
+router.post("/generateCourse", auth, isInstructor, generateCourse)
 // Edit Course routes
 router.post("/editCourse", auth, isInstructor, editCourse)
 //Add a Section to a Course
@@ -75,6 +78,8 @@ router.post("/addSubSection", auth, isInstructor, createSubSection)
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
 // Get all Registered Courses
 router.get("/getAllCourses", getAllCourses)
+// Search Courses
+router.get("/search", searchCourses)
 // Get Details for a Specific Courses
 router.post("/getCourseDetails", getCourseDetails)
 // Get Details for a Specific Courses

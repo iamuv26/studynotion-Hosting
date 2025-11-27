@@ -490,3 +490,31 @@ exports.deleteCourse = async (req, res) => {
     })
   }
 }
+
+exports.searchCourses = async (req, res) => {
+  try {
+    const { q } = req.query
+    if (!q) {
+      return res.status(400).json({ success: false, message: "Query is required" })
+    }
+    const courses = await Course.find({
+      $or: [
+        { courseName: { $regex: q, $options: "i" } },
+        { courseDescription: { $regex: q, $options: "i" } },
+      ],
+      status: "Published",
+    })
+      .populate("instructor")
+      .exec()
+
+    return res.status(200).json({
+      success: true,
+      data: courses,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}

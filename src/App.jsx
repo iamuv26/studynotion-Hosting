@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate } from "react-router-dom"
 
 // Components
 import Navbar from "./components/Common/Navbar"
+import AIChatWidget from "./components/Common/AIChatWidget"
 import OpenRoute from "./components/core/Auth/OpenRoute"
 import PrivateRoute from "./components/core/Auth/PrivateRoute"
 import AddCourse from "./components/core/Dashboard/AddCourse"
@@ -155,6 +156,7 @@ function App() {
         {/* 404 Page */}
         <Route path="*" element={<Error />} />
       </Routes>
+      <AIChatWidget />
     </div>
   )
 }

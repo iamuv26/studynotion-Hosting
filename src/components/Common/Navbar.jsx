@@ -40,7 +40,7 @@ function Navbar() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       setLoading(true)
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
@@ -60,9 +60,8 @@ function Navbar() {
 
   return (
     <div
-      className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 ${
-        location.pathname !== "/" ? "bg-richblack-800" : ""
-      } transition-all duration-200`}
+      className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 ${location.pathname !== "/" ? "bg-richblack-800" : ""
+        } transition-all duration-200`}
     >
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
         {/* Logo */}
@@ -77,18 +76,17 @@ function Navbar() {
                 {link.title === "Catalog" ? (
                   <>
                     <div
-                      className={`group relative flex cursor-pointer items-center gap-1 ${
-                        matchRoute("/catalog/:catalogName")
+                      className={`group relative flex cursor-pointer items-center gap-1 ${matchRoute("/catalog/:catalogName")
                           ? "text-yellow-25"
                           : "text-richblack-25"
-                      }`}
+                        }`}
                     >
                       <p>{link.title}</p>
                       <BsChevronDown />
-                      <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
-                        <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
+                      <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-richblack-800 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px] border border-richblack-700">
+                        <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-800 border-l border-t border-richblack-700"></div>
                         {loading ? (
-                          <p className="text-center">Loading...</p>
+                          <p className="text-center text-richblack-25">Loading...</p>
                         ) : subLinks.length ? (
                           <>
                             {subLinks
@@ -101,7 +99,7 @@ function Navbar() {
                                     .split(" ")
                                     .join("-")
                                     .toLowerCase()}`}
-                                  className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
+                                  className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-700 text-richblack-25"
                                   key={i}
                                 >
                                   <p>{subLink.name}</p>
@@ -109,7 +107,7 @@ function Navbar() {
                               ))}
                           </>
                         ) : (
-                          <p className="text-center">No Courses Found</p>
+                          <p className="text-center text-richblack-25">No Courses Found</p>
                         )}
                       </div>
                     </div>
@@ -117,11 +115,10 @@ function Navbar() {
                 ) : (
                   <Link to={link?.path}>
                     <p
-                      className={`${
-                        matchRoute(link?.path)
+                      className={`${matchRoute(link?.path)
                           ? "text-yellow-25"
                           : "text-richblack-25"
-                      }`}
+                        }`}
                     >
                       {link.title}
                     </p>

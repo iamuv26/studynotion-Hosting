@@ -23,7 +23,7 @@ function Home() {
         {/* Become a Instructor Button */}
         <Link to={"/signup"}>
           <div className="group mx-auto mt-16 w-fit rounded-full bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none">
-            <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900">
+            <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900 bg-gradient-to-r from-blue-500 to-teal-400 text-white shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-teal-500">
               <p>Become an Instructor</p>
               <FaArrowRight />
             </div>
@@ -31,13 +31,13 @@ function Home() {
         </Link>
 
         {/* Heading */}
-        <div className="text-center text-4xl font-semibold">
+        <div className="text-center text-4xl font-semibold mt-7">
           Empower Your Future with
           <HighlightText text={"Coding Skills"} />
         </div>
 
         {/* Sub Heading */}
-        <div className="-mt-3 w-[90%] text-center text-lg font-bold text-richblack-300">
+        <div className="mt-4 w-[90%] text-center text-lg font-bold text-richblack-300 leading-relaxed">
           With our online coding courses, you can learn at your own pace, from
           anywhere in the world, and get access to a wealth of resources,
           including hands-on projects, quizzes, and personalized feedback from
@@ -55,9 +55,9 @@ function Home() {
         </div>
 
         {/* Video */}
-        <div className="mx-3 my-7 shadow-[10px_-5px_50px_-5px] shadow-blue-200">
+        <div className="mx-3 my-12 shadow-[10px_-5px_50px_-5px] shadow-blue-200 animate-fade-in-up">
           <video
-            className="shadow-[20px_20px_rgba(255,255,255)]"
+            className="shadow-[20px_20px_rgba(255,255,255)] rounded-lg"
             muted
             loop
             autoPlay
