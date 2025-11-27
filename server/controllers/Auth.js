@@ -117,6 +117,7 @@ exports.login = async (req, res) => {
   try {
     // Get email and password from request body
     const { email, password } = req.body
+    console.log("Login attempt for email:", email);
 
     // Check if email or password is missing
     if (!email || !password) {
@@ -132,6 +133,8 @@ exports.login = async (req, res) => {
 
     // If user not found with provided email
     if (!user) {
+      console.log("User not found for email:", email);
+      // Return 401 Unauthorized status code with error message
       // Return 401 Unauthorized status code with error message
       return res.status(401).json({
         success: false,
@@ -164,6 +167,7 @@ exports.login = async (req, res) => {
         message: `User Login Success`,
       })
     } else {
+      console.log("Password mismatch for email:", email);
       return res.status(401).json({
         success: false,
         message: `Password is incorrect`,
@@ -182,6 +186,7 @@ exports.login = async (req, res) => {
 exports.sendotp = async (req, res) => {
   try {
     const { email } = req.body
+    console.log("SendOTP request for email:", email);
 
     // Check if user is already present
     // Find user with provided email

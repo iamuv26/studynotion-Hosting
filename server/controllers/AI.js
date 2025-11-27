@@ -40,6 +40,8 @@ exports.chat = async (req, res) => {
             responseText = "Python is a great language to learn! We have several top-rated Python courses.";
         } else if (lowerPrompt.includes("javascript") || lowerPrompt.includes("js")) {
             responseText = "JavaScript is the language of the web. Check out our Full Stack Web Development course.";
+        } else if (lowerPrompt.includes("c++") || lowerPrompt.includes("cpp")) {
+            responseText = "C++ is a powerful language for system programming. Check out our Data Structures and Algorithms in C++ course.";
         }
 
         return res.status(200).json({
