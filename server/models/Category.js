@@ -7,6 +7,7 @@ const categorySchema = new mongoose.Schema({
 		required: true,
 	},
 	description: { type: String },
+	notes: { type: String },
 	courses: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

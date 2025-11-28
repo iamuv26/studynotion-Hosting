@@ -10,7 +10,7 @@ const AIChatWidget = () => {
     const [messages, setMessages] = useState([
         {
             id: 1,
-            text: "Hi there! I'm StudyNotion AI. How can I help you today?",
+            text: "Hi! I'm StudyNotion AI. I can help you with login issues, explain coding syntax, or answer course questions. How can I help?",
             sender: "system",
         },
     ])
@@ -113,8 +113,8 @@ const AIChatWidget = () => {
 
                                     <div
                                         className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm shadow-sm ${msg.sender === "user"
-                                                ? "bg-richblack-5 text-richblack-900 rounded-br-none"
-                                                : "bg-richblack-800 text-richblack-5 backdrop-blur-sm border border-richblack-700 rounded-bl-none"
+                                            ? "bg-richblack-5 text-richblack-900 rounded-br-none"
+                                            : "bg-richblack-800 text-richblack-5 backdrop-blur-sm border border-richblack-700 rounded-bl-none"
                                             }`}
                                     >
                                         {msg.text}
@@ -166,8 +166,8 @@ const AIChatWidget = () => {
                                 onClick={handleSend}
                                 disabled={loading}
                                 className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200 ${input.trim()
-                                        ? "bg-richblack-5 text-richblack-900 shadow-md hover:scale-105"
-                                        : "bg-richblack-700 text-richblack-400"
+                                    ? "bg-richblack-5 text-richblack-900 shadow-md hover:scale-105"
+                                    : "bg-richblack-700 text-richblack-400"
                                     } disabled:opacity-50 disabled:hover:scale-100`}
                             >
                                 <BsSend size={14} className={input.trim() ? "ml-0.5" : ""} />
