@@ -9,12 +9,12 @@ async function seedCategory() {
         await dbConnect.connect();
 
         const categories = [
-            { name: "Web Development", description: "Courses related to Web Development" },
-            { name: "Mobile Development", description: "Courses related to Mobile Development" },
-            { name: "Data Science", description: "Courses related to Data Science" },
-            { name: "Artificial Intelligence", description: "Courses related to Artificial Intelligence" },
-            { name: "DevOps", description: "Courses related to DevOps" },
-            { name: "Blockchain", description: "Courses related to Blockchain" },
+            { name: "Web Development", description: "Courses related to Web Development", notes: "Basic notes and knowledge about Web Development" },
+            { name: "Mobile Development", description: "Courses related to Mobile Development", notes: "Basic notes and knowledge about Mobile Development" },
+            { name: "Data Science", description: "Courses related to Data Science", notes: "Basic notes and knowledge about Data Science" },
+            { name: "Artificial Intelligence", description: "Courses related to Artificial Intelligence", notes: "Basic notes and knowledge about Artificial Intelligence" },
+            { name: "DevOps", description: "Courses related to DevOps", notes: "Basic notes and knowledge about DevOps" },
+            { name: "Blockchain", description: "Courses related to Blockchain", notes: "Basic notes and knowledge about Blockchain" },
         ];
 
         for (const category of categories) {
@@ -23,7 +23,14 @@ async function seedCategory() {
                 await Category.create(category);
                 console.log(`Category created: ${category.name}`);
             } else {
-                console.log(`Category already exists: ${category.name}`);
+                // Update existing category with notes if missing
+                if (!existingCategory.notes) {
+                    existingCategory.notes = category.notes;
+                    await existingCategory.save();
+                    console.log(`Category updated with notes: ${category.name}`);
+                } else {
+                    console.log(`Category already exists: ${category.name}`);
+                }
             }
         }
 

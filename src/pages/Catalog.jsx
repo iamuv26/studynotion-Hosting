@@ -20,7 +20,7 @@ function Catalog() {
   const [categoryId, setCategoryId] = useState("")
   // Fetch All Categories
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
         const category_id = res?.data?.data?.filter(
@@ -34,7 +34,7 @@ function Catalog() {
   }, [catalogName])
   useEffect(() => {
     if (categoryId) {
-      ;(async () => {
+      ; (async () => {
         try {
           const res = await getCatalogPageData(categoryId)
           setCatalogPageData(res)
@@ -70,14 +70,16 @@ function Catalog() {
           <p className="text-3xl text-richblack-5">
             {catalogPageData?.data?.selectedCategory?.name}
           </p>
-          <p className="max-w-[870px] text-richblack-200">
-            {catalogPageData?.data?.selectedCategory?.description}
-          </p>
-        </div>
+          {catalogPageData?.data?.selectedCategory?.description}
+        </p>
+        <p className="max-w-[870px] text-richblack-200">
+          {catalogPageData?.data?.selectedCategory?.notes}
+        </p>
       </div>
+    </div >
 
-      {/* Section 1 */}
-      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+      {/* Section 1 */ }
+      < div className = " mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent" >
         <div className="section_heading">Courses to get you started</div>
         <div className="my-4 flex border-b border-b-richblack-600 text-sm">
           <p
@@ -106,9 +108,9 @@ function Catalog() {
             Courses={catalogPageData?.data?.selectedCategory?.courses}
           />
         </div>
-      </div>
-      {/* Section 2 */}
-      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+      </div >
+    {/* Section 2 */ }
+    < div className = " mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent" >
         <div className="section_heading">
           Top courses in {catalogPageData?.data?.differentCategory?.name}
         </div>
@@ -117,10 +119,10 @@ function Catalog() {
             Courses={catalogPageData?.data?.differentCategory?.courses}
           />
         </div>
-      </div>
+      </div >
 
-      {/* Section 3 */}
-      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+    {/* Section 3 */ }
+    < div className = " mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent" >
         <div className="section_heading">Frequently Bought</div>
         <div className="py-8">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -131,9 +133,9 @@ function Catalog() {
               ))}
           </div>
         </div>
-      </div>
+      </div >
 
-      <Footer />
+    <Footer />
     </>
   )
 }
