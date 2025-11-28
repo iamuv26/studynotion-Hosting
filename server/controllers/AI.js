@@ -21,7 +21,7 @@ exports.chat = async (req, res) => {
 
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
         const model = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash",
+            model: "gemini-pro",
             systemInstruction: `You are StudyNotion AI, a helpful and enthusiastic teaching assistant for the StudyNotion EdTech platform.
             
             Your primary responsibilities are:
