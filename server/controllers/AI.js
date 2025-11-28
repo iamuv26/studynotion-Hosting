@@ -21,7 +21,7 @@ exports.chat = async (req, res) => {
 
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
         const model = genAI.getGenerativeModel({
-            model: "gemini-pro",
+            model: "gemini-1.5-flash",
             systemInstruction: `You are StudyNotion AI, a helpful and enthusiastic teaching assistant for the StudyNotion EdTech platform.
             
             Your primary responsibilities are:
@@ -45,6 +45,17 @@ exports.chat = async (req, res) => {
 
     } catch (error) {
         console.error("AI Chat Error:", error);
+
+        // Debug: List available models to understand why 404 is occurring
+        try {
+            console.log("Attempting to list available models...");
+            const modelsResp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${process.env.GEMINI_API_KEY}`);
+            const modelsData = await modelsResp.json();
+            console.log("Available Models:", JSON.stringify(modelsData, null, 2));
+        } catch (listError) {
+            console.error("Failed to list models:", listError);
+        }
+
         return res.status(500).json({
             success: false,
             message: "Failed to generate AI response",
