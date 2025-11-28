@@ -2,9 +2,7 @@ const nodemailer = require("nodemailer");
 
 const mailSender = async (email, title, body) => {
   try {
-    console.log("MAIL_HOST:", "smtp-relay.brevo.com");
-    console.log("MAIL_USER:", process.env.MAIL_USER);
-    console.log("MAIL_PASS (first 5 chars):", process.env.MAIL_PASS ? process.env.MAIL_PASS.substring(0, 5) : "UNDEFINED");
+
 
     let transporter = nodemailer.createTransport({
       host: "smtp-relay.brevo.com",
